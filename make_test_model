@@ -1,0 +1,38 @@
+import onnx
+from onnx import helper, TensorProto
+
+# 1) Nodo Identity
+node = helper.make_node(
+    "Identity",
+    inputs=["input"],
+    outputs=["output"],
+    name="IdentityNode"
+)
+
+# 2) Descrizione di input e output
+input_info  = helper.make_tensor_value_info("input",  TensorProto.FLOAT, [1,1])
+output_info = helper.make_tensor_value_info("output", TensorProto.FLOAT, [1,1])
+
+# 3) Costruisci la graph
+graph = helper.make_graph(
+    [node],
+    "TestGraph",
+    [input_info],
+    [output_info]
+)
+
+# 4) Crea il modello e imposta opset_import a 22
+model = helper.make_model(
+    graph,
+    producer_name="onnxruntime-test",
+    opset_imports=[ helper.make_operatorsetid("", 22) ]
+)
+
+# 5) Forza l’IR version a 10 (massimo supportato)
+model.ir_version = 10
+
+# 6) (Opzionale) controlla che il modello sia valido
+onnx.checker.check_model(model)
+
+# 7) Salva nella cartella dei test del tuo package
+onnx.save(model, "test_model.onnx")

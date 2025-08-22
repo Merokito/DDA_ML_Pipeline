@@ -1,0 +1,12 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+*.pkl
+*.onnx
+models/
+onnx_models/
+
+.DS_Store
+Thumbs.db

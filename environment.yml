@@ -1,0 +1,15 @@
+name: dda-ml        # nome dell'env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9       
+  - numpy
+  - pandas
+  - scikit-learn
+  - xgboost
+  - pip
+  - pip:
+    - m2cgen 
+    - skl2onnx      
+    - onnxruntime   
