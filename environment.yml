@@ -12,4 +12,5 @@ dependencies:
   - pip:
     - m2cgen 
     - skl2onnx      
-    - onnxruntime   
+    - onnxruntime
+    - onnxmltools
